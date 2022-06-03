@@ -1,0 +1,207 @@
+
+
+<div class="scrollable" ui-shared-state="searchBar" >
+
+	
+	
+  <div class="scrollable-content" ui-scroll-bottom="bottomReached()">
+  
+   <div class="section">
+      <div class="panel-group" 
+        
+        ui-shared-state="myAccordion" 
+        ui-default='0'>
+		
+  <div class="panel panel-default" ng-repeat="item in scrollItems">
+  
+          <div class="panel-heading" ui-set="{'myAccordion': item.index}"  style="font-weight:500; font-size:12px;">
+				Create Request Quote
+				<i class="fa fa-arrow-circle-o-left pull-right fa-2x" aria-hidden="true" style="margin-right:20px;" title="Back" ng-click="go('/dashBord')"></i>
+				
+          </div>
+		
+          <div ui-if="myAccordion == {{item.index}}">
+            <div class="panel-body">        
+			   
+			    
+			   
+			    
+<form role="form" name="createForm" ng-init="basicAutoComplete()">
+    
+	
+ <fieldset>
+      
+        <div class="form-group has-success has-feedback">
+          <label>POL</label>
+          <select id="pol"  ng-model="sendData.pol"    class="form-control"  >
+					<option value="-1">Select POL..</option>
+					<option  ng-repeat="item in polNameArray" value="{{item.text}}">{{item.text}}</option>
+					  
+		</select>
+        </div>
+
+        <div class="form-group">
+          <label>POD </label>
+          <select id="pod"    ng-model="sendData.pod"  class="form-control"   >
+			<option value="-1">Select POD..</option>
+			<option  ng-repeat="item in polNameArray" value="{{item.text}}">{{item.text}}</option>		 
+		</select>
+        </div>
+		<div class="form-group">
+          <label>Shipper</label>   				 
+				 
+				
+				<input type="text"  ng-model="sendData.shipper"
+                 class="form-control"
+                 placeholder="Please enter shipper"  maxlength="50">
+			
+        </div>
+		<div class="form-group">
+          <label>Contract Party</label>   				 
+				 
+				
+				<input type="text"  ng-model="sendData.contractParty"
+                 class="form-control"
+                 placeholder="Please enter contract party" required  maxlength="50">
+			
+        </div>
+		<div class="form-group">
+          <label>Vessel</label>
+          <input type="text"  ng-model="sendData.vessel"
+                 class="form-control"
+                 placeholder="Please enter vessel" required maxlength="20">
+        </div>
+		<div class="form-group">
+          <label>Voyage</label>
+          <input type="text"  ng-model="sendData.voyage"
+                 class="form-control"
+                 placeholder="Please enter voyage" required maxlength="10">
+        </div>
+		<div class="form-group">
+          <label>Dest F/T</label>
+          <input type="number"  ng-model="sendData.freeTime"
+                 class="form-control"
+                 placeholder="Please enter free Time" maxlength="3" min="1" max="999"  onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;" required>
+        </div>
+		<div class="form-group">
+          <label>Weekly volume</label>
+          <input type="text"  ng-model="sendData.weeklyVolume"
+                 class="form-control"
+                 placeholder="Please enter weekly volume" maxlength="50" required>
+        </div>
+		<div class="form-group">
+          <label>Weight</label>
+          <input type="text"  ng-model="sendData.weight"
+                 class="form-control"
+                 placeholder="Please enter weight"  maxlength="50"required>
+        </div>
+
+		 
+		
+		<div class="form-group">
+          <label>Comodity</label>
+          <input type="text"  ng-model="sendData.cmodity"
+                 class="form-control"
+                 placeholder="Please enter Comodity" maxlength="50" required>
+        </div>
+		
+		<div class="form-group">
+          <label>Target Rate</label>
+          <input type="text"   ng-model="sendData.targetRate"
+                 class="form-control" maxlength="20"
+                 placeholder="Please enter Target Rate" required>
+        </div>
+		
+		<div class="form-group">
+          <label>Target etd</label>
+          <input type="date"  ng-model="sendData.targetEtd"
+                 class="form-control"
+                 placeholder="Please enter Target etd" required>
+        </div>
+		<div class="form-group">
+          <label>Remarks</label>
+          <textarea   ng-model="sendData.remarks"
+                 class="form-control"   > </textarea>
+        </div>
+
+		
+    </fieldset>
+    <hr>
+
+    <button class="btn btn-primary btn-block" ng-click="onSubmit(createForm)">
+      Submit
+    </button>
+
+	</form>
+			   
+				
+				 
+			  
+            </div>
+          </div>
+        </div>
+		
+		 </div>
+        </div>
+		
+    <!--div class="list-group">
+      <div  ng-repeat="item in scrollItems" href="" class="list-group-item flex-container" >
+		
+        <div class="flex-item1" ><span style="font-weight:500;">POL :</span>{{ item.pol }} </div>
+		<div class="flex-item1" ><span style="font-weight:500;">POD :</span>{{ item.pod }} </div>
+		<div class="flex-item1" ><span style="font-weight:500;">Validity :</span>{{ item.validity }} </div>
+		
+		<i class="fa fa-chevron-right pull-right"></i>
+      </div>
+    </div-->
+  </div>
+
+</div>
+
+
+
+<div ui-content-for="modals" style="margin-top:50%;">   
+   <div class="modal" ng-if="showDialog" ui-shared-state="modal1">
+  <div class="modal-backdrop in"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h4 class="modal-title">{{messageTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <h5>{{message}}</h5>
+      </div>
+      <div class="modal-footer">
+		<button ui-turn-off="modal1" ng-if="messageTitle=='Error'" ng-click="closeDialog();" class="btn btn-default">Ok</button>
+        <button ui-turn-off="modal1" ng-if="messageTitle!='Error'" ng-click="go('/dashBord')" class="btn btn-default">Close</button>
+         
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+  </div>
+
+<style>
+
+.w-10{
+	width:15%;
+}
+.headerSize{
+	font-weight:500;
+	
+}
+
+.flex-container {  
+  display: flex; 
+   
+}
+
+.flex-item1 {   
+     padding: 2px;  
+  
+}
+</style>

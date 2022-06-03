@@ -1,0 +1,53 @@
+
+<div class="login-body"  style="background-image: url('../images/rcl-group.png'); background-position: center;
+background-size: cover;">
+<div class="navbar navbar-app navbar-absolute-top section-blue" >
+
+    <div class="btn-group pull-left">
+      <div class="btn btn-navbar">
+        <div class="logo-container flex-item" >
+            <a ng-click = "onShow()"><img src="images/rcl_logo.png" alt="rcl-logo"></a>
+          </div>
+       
+          <div class="dynamicPricing ml-4 mt-3" ng-if="showButton" >
+            <div>
+                <button class="btn mb-2" style="background-color : white; color: black;"  ng-click="openPortData('/portData')">Port Data</button>
+            </div>
+            <div>
+                <button class="btn"  style="background-color : white; color: black; " ng-click="openSummary('/summary')" >Summary</button>
+        
+            </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-group  pull-right">
+    <a ui-turn-on='myDropdown' class='btn'>
+      <i class="fa fa-ellipsis-v" style="color: white;"></i>
+    </a>
+    <ul class="dropdown-menu" 
+      ui-outer-click="Ui.turnOff('myDropdown')"
+      ui-outer-click-if="Ui.active('myDropdown')"
+      role="menu"
+      ui-show="myDropdown" 
+      ui-state="myDropdown"
+      ui-turn-off="myDropdown">
+  
+      <li><a>Logout</a></li>
+      <li><a>Help</a></li>
+    </ul>
+  </div>
+</div>
+<div class="navbar navbar-app navbar-absolute-bottom section-blue" style="height: 250px;">
+
+  <h2 style="color:white ; text-align: center; margin-top:50px ;">Dynamic Pricing</h2>
+ 
+</div>
+
+</div>
+
+<div class="section-blue flex-item  pull-bottom"  style="width:100%; height: 70px;">
+    <div style="margin:0% 10% 0% 5%;color:white;text-align:center;width:100%; font-weight: 300;" class="login-header-text">	   
+        Dynamic Pricing
+         
+    </div>    
+ </div>

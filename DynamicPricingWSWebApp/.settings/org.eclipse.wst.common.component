@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="DynamicPricingWSWebApp">
+        <wb-resource deploy-path="/" source-path="/public_html" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="java-output-path" value="/DynamicPricingWSWebApp/build/classes"/>
+        <property name="context-root" value="DynamicPricingWSWebApp"/>
+    </wb-module>
+</project-modules>

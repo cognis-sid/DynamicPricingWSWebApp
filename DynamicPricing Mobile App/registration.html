@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="css/registration.css" />
+<div  class=" register">
+<div class="form-group container register-wrapper"   data-spy="scroll">
+    <form style="margin-left: 30%; " class="mt-4"  >
+        <div  ng-show="firstPage">
+        <div class = "form-group  register-text">
+            <label for = "firstName"> First Name </label>
+            <input type = "text" id = "firstName" class = "form-control register-field"  placeholder = "Enter First Name " ng-model = "firstName">
+        </div>
+        <div class = "form-group">
+            <label for = "lastName"> Last Name </label>
+            <input type = "text" id = "lastName" class = "form-control register-field" placeholder = "Enter Your Last Name " ng-model = "lastName">
+        </div>
+        <div class = "form-group">
+            <label for = "email"  class="register-text"> Email Address </label>
+            <input type = "email" id = "email" class = "form-control register-field" placeholder = "Enter Your Email " ng-model = "email">
+        </div>
+        <div class = "form-group form-outline">
+            <label for = "repeatEmail" class="register-text"> Repeat Email Address </label>
+            <input type = "email" id = "repeatEmail" class = "form-control register-field" placeholder = "Enter Repeat Email Address " ng-model = "repeatEmail">
+        </div>
+     
+        <div>
+          
+        </div>
+        <div class = "form-group">
+            <label for = "userId" class="register-text"> User ID </label>
+            <input type = "text" id = "userId" class = "form-control register-field" placeholder = "Enter  Your User ID " ng-model = "userId">
+        </div>
+        <div class = "form-group">
+            <label for = "repeatEmail" class="register-text"> Password </label>
+            <input type = "password" id = "password" class = "form-control register-field" placeholder = "Enter Your password " ng-model = "password">
+        </div>
+        <div class = "form-group ">
+            <label for = "repeatpassword" class="register-text"> Repeat Password </label>
+            <input type = "password" id = "repeatpassword" class = "form-control register-field" placeholder = "Enter Repeat Password" ng-model = "repeatpassword">
+        </div>
+        
+        <div class="float-right mt-4 mr-5" >
+            <button type="button" class="btn btn-primary float-right mr-2" ng-click="secondPage()" > Next</button>								
+        </div>
+    </div>
+        <div ng-if="secPage">
+            <div class = "form-group ">
+                <label for = "compName" class="register-text"> Company Name </label>
+                <input type = "text" id = "compName" class = "form-control register-field" placeholder = "Enter Your Company Name " ng-model = "compName">
+            </div>
+            <div class = "form-group ">
+                <label for = "add1" class="register-text"> Address 1 </label>
+                <input type = "text" id = "add1" class = "form-control register-field" placeholder = "Enter  Your Address 1 " ng-model = "address1">
+            </div>
+            <div class = "form-group ">
+                <label for = "add2" class="register-text"> Address 2 </label>
+                <input type = "text" id = "add2" class = "form-control register-field" placeholder = "Enter  Your Address 2" ng-model = "address2">
+            </div>
+            <div class = "form-group ">
+                <label for = "add3" class="register-text"> Address 3 </label>
+                <input type = "text" id = "add3" class = "form-control register-field" placeholder = "Enter  Your Address 3 " ng-model = "address3">
+            </div>
+            <div class = "form-group ">
+                <label for = "add4"class="register-text"> Address 4 </label>
+                <input type = "text" id = "add4" class = "form-control register-field" placeholder = "Enter Your Address 4 " ng-model = "address4">
+            </div>
+                <div class="form-group">
+                    <label for = "state" class="register-text">Country</label>
+                    <select class = "form-control register-field">
+                        <option></option>
+                    </select>
+                </div>
+                    <div class = "form-group">
+                        <label for = "state" class="register-text">State</label>
+                        <input type = "text" id = "state" class = "form-control register-field" placeholder = "Enter Your State " ng-model = "state">
+                    </div>
+              
+                <div class="form-group">
+                    <label for = "city" class="register-text">City</label>
+                    <select class = "form-control register-field">
+                        <option></option>
+                    </select>
+                </div>
+
+                    <div class = "form-group ">
+                        <label for = "phnNo" class="register-text">Phone Number</label>
+                        <input type = "text" id = "phnNo" class = "form-control register-field" placeholder = "Enter Your Phone Number " ng-model = "phoneNo">
+                    </div>
+               
+             
+                    <div class = "form-group ">
+                        <label for = "faxNo" class="register-text">Fax Number</label>
+                        <input type = "text" id = "faxNo" class = "form-control register-field" placeholder = "Enter Your Fax Number " ng-model = "faxNo">
+                    </div>  
+                    <div class="row float-right">
+                    <div class=" mt-4">
+                        <button type="button" class="btn btn-primary float-right mr-2" ng-click="previousPage()" > Back</button>								
+                    </div>
+                    <div class="f mt-4 mr-5">
+                        <button type="button" class="btn btn-primary float-right mr-2" ng-click="secondPage()" > Submit</button>								
+                    </div> 
+                </div>  
+
+            </div>
+            
+        </div>
+
+
+
+    </form>
+
+ </div>
+</div>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+
+
+<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<!-- <property name="host" value="10.0.3.131" />
+		<property name="username" value="rclvas" />
+		<property name="password" value="rclvas" /> -->	
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.socketFactory.port">25</prop>
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+				<prop key="mail.smtp.port">25</prop>
+			</props>
+		</property>
+	</bean>
+
+
+
+<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+      <property name="velocityProperties">
+         <value>
+          resource.loader=class
+          class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+         </value>
+      </property>
+   </bean>
+
+	<bean id="mailMail" class="com.rclgroup.dolphin.web.email.EZLMail">
+		<property name="mailSender" ref="mailSender" />
+		<!--<property name="adminEmail" value="eservice@rclgroup.com"></property>  -->
+		<property name="javaMailSender" ref="mailSender" />
+		<property name="velocityEngine" ref="velocityEngine"/>
+	</bean>
+
+
+	 <bean id="registrationdao" class="com.rclgroup.dolphin.web.dao.RegistrationJdbcDao">
+			<property name="dataSource" ref="dataSourceTsi" />
+		</bean> 
+		
+	<bean id="dataSourceTsi" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:/VASJNDI" />
+		<!--  property name="jndiName" value="java:/ESVJNDI" /-->
+	</bean>
+
+
+	<bean id="dataSourcePostGress" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:/WEBJNDI" />
+	</bean>
+	
+	<bean id="camMasterDao"
+		class="com.rclgroup.dolphin.web.dao.CamCustomerMasterJdbcDao">
+		<property name="dataSource" ref="dataSourcePostGress" />
+	</bean>
+	 
+
+	<!-- Transaction manager for a single JDBC DataSource (alternative to JTA) -->
+	<bean id="transactionManager2"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceTsi" />
+	</bean>
+	
+	<bean class="com.rclgroup.dolphin.web.common.RrcApplicationContextWS"></bean>
+
+ 
+	<bean id="authDao" class="com.rclgroup.dolphin.web.auth.dao.AuthJdbcDao">
+		<property name="dataSource" ref="dataSourceTsi" />
+	</bean>
+	 
+	<aop:config>
+		<aop:advisor
+			pointcut="execution(public * com.rclgroup.dolphin.web.dao.*.*Dao.*(..))"
+			advice-ref="transactionAdvice2" />
+	</aop:config>
+
+	<tx:advice id="transactionAdvice2" transaction-manager="transactionManager2">
+		<tx:attributes>
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Throwable" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:advisor
+			pointcut="execution(public * com.rclgroup.dolphin.web.dao.*.*Dao.*(..))"
+			advice-ref="transactionAdvice2" />
+	</aop:config>
+
+	<!-- Cognis DAO -->
+	<!--Need to move to JNDO -->
+	 
+	<bean id="userSerchDao"
+		class="com.rclgroup.dolphin.web.dao.UserSearchDaoJdbcDao">
+		<property name="dataSource" ref="dataSourceTsi" />
+	</bean>
+	
+	
+	<bean id="quoteDao"
+		class="com.rclgroup.dolphin.web.dao.QuoteRequestDaoJdbcDao">
+		<property name="dataSource" ref="dataSourceTsi" />
+	</bean>
+
+	<bean id="loginDao"
+		class="com.rclgroup.dolphin.web.dao.LoginDaoJdbcDao">
+		<property name="dataSource" ref="dataSourceTsi" />
+	</bean>
+	
+	<bean id="emailDao"
+		class="com.rclgroup.dolphin.web.dao.EmailConfigJdbcDao">
+		<property name="dataSource" ref="dataSourceTsi" />
+	</bean>
+	<bean id="getPortDataDao"
+		class="com.rclgroup.dolphin.web.dao.GetPortDataJdbcDao">
+		<property name="dataSource" ref="dataSourceTsi" />
+	</bean>
+		 
+		 
+</beans>

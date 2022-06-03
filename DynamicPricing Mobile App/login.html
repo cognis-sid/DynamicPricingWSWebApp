@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="css/login-new.css" />
+
+<div class="login-body">
+                            <div id="panel_bhumnet" class="login-wrapper" >
+	
+                                 
+                                <div class="login-form">
+                                    <div class="login-row">
+                                        <div class="login-text">Login ID  </div>
+                                        <input name="txtUserId" maxlength="30" id="txtUserId" class="login-field" type="text"  ng-model="emailId"  placeholder="Please enter the User id" required>
+                                    </div>
+                                    <div class="login-row" ng-if="isSucessLogin">
+                                        <div class="login-text">Token</div>
+                                       <input name="txtUserId" maxlength="30" id="txtUserId" class="login-field" type="text"  ng-model="pass.token" placeholder="Please enter the token" required >
+                                    </div>
+                                    
+                                </div>
+                                <div class="login-btn-row">
+                                    <input type="submit" name="btn_bhumnetLogin" ng-if="!isSucessLogin" value="Get Token" ng-click="sendReq();" id="btn_bhumnetLogin" class="submit-button css300">
+                                    <input type="submit" name="btn_bhumnetLogin" ng-if="isSucessLogin" value="Login" ng-click="sendReqLogin();" id="btn_bhumnetLogin" class="submit-button css300">
+                                   
+                                </div>
+                            
+</div>
+                        </div>
+						
+						
+												
+<div ui-content-for="modals" style="margin-top:50%;">  
+   <div class="modal"  ui-shared-state="modal1" ng-if="showDialog">
+  <div class="modal-backdrop in"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+         
+        <h4 class="modal-title">Message</h4>
+      </div>
+      <div class="modal-body">
+        <h5> {{isSucessLogin==false?'User does not exist':'Please enter the valid token' }}</h5>
+      </div>
+      <div class="modal-footer">
+        <button ui-turn-off="modal1" ng-click="closeDialog()" class="btn btn-default">Close</button>
+         
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+  </div>

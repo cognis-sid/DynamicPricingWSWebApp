@@ -1,0 +1,202 @@
+<link rel="stylesheet" href="css/portData.css" />
+ 
+<div class="portField scrollable" ng-init="onLoad()" ui-shared-state="searchBar">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="flex-container">
+            <div class="logo-container flex-item">
+                <a href="#"><img src="images/rcl_logo.png" alt="rcl-logo"></a>
+            </div>
+            <div class="section-blue flex-item " style="width:100%;">
+                <div style="margin:0% 10% 0% 5%;color:white;text-align:center;width:100%;" class="login-header-text">
+                    Port Data
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scrollable-content" ui-scroll-bottom="bottomReached()">
+
+        <div class="fieldArea row mt-5">
+            <div class="col-6">
+                <label class="text-white">port</label>
+                <select class="form-control"ng-model="portCode" ng-click="termianalData(portCode)">
+                    <option ng-repeat="item in details">{{item.portCode}}</option>
+                    <option>CNZPU</option>
+
+                </select>
+            </div>
+            <div class="col-6">
+                <label class="text-white">Terminal</label>
+                <select class="form-control">
+                    <option ng-repeat="item in terminalData" > {{item.terminal_code}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="fieldArea ">
+            <div class="col-6">
+                <label class="text-white">Situation/Event</label>
+                <select class="dropDown form-control" ng-model="region.name">
+                    <option ng-option value="portClose" selected> Port Close </option>
+                    <option ng-option value="craneDown"> Crane Down</option>
+                    <option ng-option value="situation">Situation/Event </option>
+                    <option ng-option value="truckMovent">Truck Movement </option>
+                    <option ng-option value="utlzOver">CY Utlz over 100% </option>
+                    <option ng-option value="maintenancePlan">Terminal Maintenance Plan </option>
+                    <option ng-option value="shortage">Stevedore Shortage </option>
+                    <option ng-option value="formalityIncreasing">Port Formality Increasing</option>
+                </select>
+            </div>
+
+            <div class="form-group mt-3">
+                <div class="  row">
+                    <div class="col-6">
+                        <label>Start Event(date&time)</label>
+                        <input type="date" ng-model="startEvent" class="form-control"
+                            placeholder="Please enter Target etd" required>
+                    </div>
+                    <div class=" col-6">
+                        <label>End Event(date&time)</label>
+                        <input type="date" ng-model="endEvent" class="form-control"
+                            placeholder="Please enter Target etd" required>
+                    </div>
+                    <div class=" col-6">
+                        <label>Start Effected(date&time)</label>
+                        <input type="date" ng-model="startEffect" class="form-control"
+                            placeholder="Please enter Target etd" required>
+                    </div>
+                    <div class="col-6">
+                        <label>End Effected(date&time)</label>
+                        <input type="date" ng-model="endEffect" class="form-control"
+                            placeholder="Please enter Target etd" required>
+                    </div>
+
+                    <div class=" col-6" ng-if="region.name == 'craneDown'">
+                        <label>Max Crane</label>
+                        <input type="text "  ng-model="maxCrane" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'situation'">
+                        <label>Operating Crane</label>
+                        <input type="text" ng-model="operatingCrane" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'truckMovent' || region.name == 'utlzOver'">
+                        <label>Max Truck/Vessel </label>
+                        <input type="text " ng-model="maxTruck" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'truckMovent' || region.name == 'utlzOver'">
+                        <label>Operating Truck/Vessel </label>
+                        <input type="text " ng-model="operatingTruck" class="form-control"  />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'maintenancePlan'">
+                        <label>No of Berth (Max)</label>
+                        <input type="text " ng-model="berthMax" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'maintenancePlan'">
+                        <label>No of Berth (Available) </label>
+                        <input type="text " ng-model="berthAvailable" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'shortage'">
+                        <label>Stevedore Shortage % </label>
+                        <input type="text " ng-model="stevedoreShortage" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name=='formalityIncreasing'">
+                        <label>Normal Formality (Hrs)</label>
+                        <input type="text " ng-model="normalFormality" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name=='formalityIncreasing'">
+                        <label>Abnormal Formality (Hrs)</label>
+                        <input type="text " ng-model="abnormalFormality" class="form-control" />
+                    </div>
+                </div>
+
+                    <div class="mt-3 mr-5 row " style="float: right;">
+                        <button type="button" class="btn btn-primary float-right mr-2" ng-click="addNewItem()" ><i class="fa fa-plus"
+                                 ></i> New Item</button>
+                        <button type="button"  class="btn btn-primary float-right "><i class="fa fa-undo"
+                                    aria-hidden="true"></i>Reset</button>
+                    </div>
+               
+            </div>
+        </div>
+        <div class="fieldArea" ng-if="newItem">
+            <div class="col-6">
+                <label class="text-white">Situation/Event</label>
+                <select class="dropDown form-control" ng-model="region.name">
+                    <option ng-option value="portClose" selected> Port Close </option>
+                    <option ng-option value="craneDown"> Crane Down</option>
+                    <option ng-option value="situation">Situation/Event </option>
+                    <option ng-option value="truckMovent">Truck Movement </option>
+                    <option ng-option value="utlzOver">CY Utlz over 100% </option>
+                    <option ng-option value="maintenancePlan">Terminal Maintenance Plan </option>
+                    <option ng-option value="shortage">Stevedore Shortage </option>
+                    <option ng-option value="formalityIncreasing">Port Formality Increasing</option>
+                </select>
+            </div>
+
+            <div class="form-group mt-3">
+                <div class="  row">
+                    <div class="col-6">
+                        <label>Start Event(date&time)</label>
+                        <input type="date" ng-model="startEvent" class="form-control"
+                            placeholder="Please enter Target etd" required>
+                    </div>
+                    <div class=" col-6">
+                        <label>End Event(date&time)</label>
+                        <input type="date" ng-model="endEvent" class="form-control"
+                            placeholder="Please enter Target etd" required>
+                    </div>
+                    <div class=" col-6">
+                        <label>Start Effected(date&time)</label>
+                        <input type="date" ng-model="startEffect" class="form-control"
+                            placeholder="Please enter Target etd" required>
+                    </div>
+                    <div class="col-6">
+                        <label>End Effected(date&time)</label>
+                        <input type="date" ng-model="endEffect" class="form-control"
+                            placeholder="Please enter Target etd" required>
+                    </div>
+
+                    <div class=" col-6" ng-if="region.name == 'craneDown'">
+                        <label>Max Crane</label>
+                        <input type="text "  ng-model="maxCrane" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'situation'">
+                        <label>Operating Crane</label>
+                        <input type="text" ng-model="operatingCrane" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'truckMovent' || region.name == 'utlzOver'">
+                        <label>Max Truck/Vessel </label>
+                        <input type="text " ng-model="maxTruck" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'truckMovent' || region.name == 'utlzOver'">
+                        <label>Operating Truck/Vessel </label>
+                        <input type="text " ng-model="operatingTruck"class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'maintenancePlan'">
+                        <label>No of Berth (Max)</label>
+                        <input type="text " ng-model="berthMax" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'maintenancePlan'">
+                        <label>No of Berth (Available) </label>
+                        <input type="text " ng-model="berthAvailable" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name == 'shortage'">
+                        <label>Stevedore Shortage % </label>
+                        <input type="text " ng-model="stevedoreShortage" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name=='formalityIncreasing'">
+                        <label>Normal Formality (Hrs)</label>
+                        <input type="text " ng-model="normalFormality" class="form-control" />
+                    </div>
+                    <div class=" col-6" ng-if="region.name=='formalityIncreasing'">
+                        <label>Abnormal Formality (Hrs)</label>
+                        <input type="text " ng-model="abnormalFormality" class="form-control" />
+                    </div>
+                </div>
+                <div class="mt-3 mr-5 row " style="float: right;">
+                    <button type="button" class="btn btn-primary float-right mr-2" ng-click="addNewItem()" >
+                        <i class="fa fa-plus" ></i> Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,266 @@
+!SESSION 2022-05-26 13:26:09.770 -----------------------------------------------
+eclipse.buildId=4.22.0.I20211124-1800
+java.version=18.0.1.1
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.jface 2 0 2022-05-26 13:27:07.358
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2022-05-26 13:27:07.358
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@139e291e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@56b4951a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2022-05-26 13:27:07.358
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2d58136,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.rename,Rename,
+		Rename the selected item,
+		Category(org.eclipse.ui.category.file,File,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@173a86ad,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.ui.navigator 2 0 2022-05-26 13:27:18.804
+!MESSAGE Can't find Navigator Content Descriptor with id: org.eclipse.jst.servlet.ui.EnhancedJavaRendering
+
+!ENTRY org.eclipse.ui.navigator 2 0 2022-05-26 13:27:18.806
+!MESSAGE Can't find Navigator Content Descriptor with id: org.eclipse.jst.servlet.ui.EnhancedJavaRendering
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-05-26 13:27:19.302
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\DELL'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.jboss.tools.quarkus.lsp4e 4 0 2022-05-26 13:27:26.178
+!MESSAGE RemoteSystemsTempFiles does not exist
+!STACK 1
+Java Model Exception: Error in Java Model (code 969): RemoteSystemsTempFiles does not exist
+	at org.eclipse.jdt.internal.core.JavaElement.newJavaModelException(JavaElement.java:584)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:254)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:328)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:314)
+	at org.eclipse.jdt.internal.core.JavaProject.getJavaProjectElementInfo(JavaProject.java:2131)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2867)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2861)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2879)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2871)
+	at org.eclipse.jdt.internal.core.JavaProject.findType(JavaProject.java:1776)
+	at org.eclipse.jdt.internal.core.JavaProject.findType(JavaProject.java:1677)
+	at org.jboss.tools.quarkus.lsp4e.internal.qute.QuteProjectListener.configureProject(QuteProjectListener.java:62)
+	at org.jboss.tools.quarkus.lsp4e.internal.qute.QuteProjectListener.<init>(QuteProjectListener.java:39)
+	at org.jboss.tools.quarkus.lsp4e.internal.startup.qute.QuteStartup.earlyStartup(QuteStartup.java:24)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:79)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:55)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.Workbench$40.run(Workbench.java:2667)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2022-05-26 13:27:26.187
+!MESSAGE RemoteSystemsTempFiles does not exist
+
+!ENTRY org.jboss.tools.foundation.core 4 0 2022-05-26 13:27:35.126
+!MESSAGE Unable to load properties from http://download.jboss.org/jbosstools/configuration/ide-config.properties. Falling back on embedded properties
+!STACK 1
+org.eclipse.core.runtime.CoreException: Unable to retrieve properties from http://download.jboss.org/jbosstools/configuration/ide-config.properties
+	at org.jboss.tools.foundation.core.properties.internal.VersionPropertiesProvider.loadProperties(VersionPropertiesProvider.java:276)
+	at org.jboss.tools.foundation.core.properties.internal.VersionPropertiesProvider.getValue(VersionPropertiesProvider.java:151)
+	at org.jboss.tools.central.internal.DefaultJBossCentralConfigurator.getBuzzUrl(DefaultJBossCentralConfigurator.java:49)
+	at org.jboss.tools.central.jobs.RefreshBuzzJob.getUrlString(RefreshBuzzJob.java:54)
+	at org.jboss.tools.central.jobs.AbstractRefreshJob.getURL(AbstractRefreshJob.java:298)
+	at org.jboss.tools.central.jobs.AbstractRefreshJob.getUrlModified(AbstractRefreshJob.java:281)
+	at org.jboss.tools.central.jobs.AbstractRefreshJob.run(AbstractRefreshJob.java:207)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.jboss.tools.foundation.core 4 0 2022-05-26 13:27:35.126
+!MESSAGE Unable to retrieve properties from http://download.jboss.org/jbosstools/configuration/ide-config.properties
+
+!ENTRY org.eclipse.oomph.p2.core 2 0 2022-05-26 13:28:30.372
+!MESSAGE The file C:\Users\DELL\.p2\org.eclipse.equinox.p2.engine\profileRegistry\C__Users_DELL_eclipse_jee-2022-03_eclipse.profile\1653396162045.profile.gz of length 364480 failed to load properly
+!STACK 0
+org.eclipse.oomph.util.IORuntimeException: The file C:\Users\DELL\.p2\org.eclipse.equinox.p2.engine\profileRegistry\C__Users_DELL_eclipse_jee-2022-03_eclipse.profile\1653396162045.profile.gz of length 364480 failed to load properly
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.loadProfile(LazyProfileRegistry.java:333)
+	at org.eclipse.oomph.p2.internal.core.LazyProfile.getDelegate(LazyProfile.java:78)
+	at org.eclipse.oomph.p2.internal.core.LazyProfile.getDelegate(LazyProfile.java:98)
+	at org.eclipse.oomph.p2.internal.core.LazyProfile.snapshot(LazyProfile.java:318)
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.getProfiles(LazyProfileRegistry.java:149)
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.getProfiles(LazyProfileRegistry.java:131)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.getExistingFeatures(ExtensionUtility.java:418)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.getAllExtensionsWithServer(ExtensionUtility.java:464)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.getExtensionsWithServer(ExtensionUtility.java:550)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.refreshServerAdapters(ExtensionUtility.java:681)
+	at org.eclipse.wst.server.discovery.Discovery.refreshServerAdapters(Discovery.java:68)
+	at org.eclipse.wst.server.ui.ServerUIUtil$1RefreshJob.run(ServerUIUtil.java:109)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.io.IOException: Premature end of file.
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry$Parser.parse(SimpleProfileRegistry.java:756)
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry$Parser.parse(SimpleProfileRegistry.java:742)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:119)
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.loadProfile(LazyProfileRegistry.java:325)
+	... 12 more
+Caused by: org.xml.sax.SAXParseException; lineNumber: 56605; columnNumber: 767; Premature end of file.
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1251)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry$Parser.parse(SimpleProfileRegistry.java:753)
+	... 17 more
+
+!ENTRY org.eclipse.oomph.p2.core 2 0 2022-05-26 13:28:30.723
+!MESSAGE The file C:\Users\DELL\.p2\org.eclipse.equinox.p2.engine\profileRegistry\C__Users_DELL_eclipse_jee-2022-03_eclipse.profile\1653396162045.profile.gz of length 364480 failed to load properly
+!STACK 0
+org.eclipse.oomph.util.IORuntimeException: The file C:\Users\DELL\.p2\org.eclipse.equinox.p2.engine\profileRegistry\C__Users_DELL_eclipse_jee-2022-03_eclipse.profile\1653396162045.profile.gz of length 364480 failed to load properly
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.loadProfile(LazyProfileRegistry.java:333)
+	at org.eclipse.oomph.p2.internal.core.LazyProfile.getDelegate(LazyProfile.java:78)
+	at org.eclipse.oomph.p2.internal.core.LazyProfile.getDelegate(LazyProfile.java:98)
+	at org.eclipse.oomph.p2.internal.core.LazyProfile.snapshot(LazyProfile.java:318)
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.getProfiles(LazyProfileRegistry.java:149)
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.getProfiles(LazyProfileRegistry.java:131)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.getExistingFeatures(ExtensionUtility.java:418)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.getAllExtensionsWithServer(ExtensionUtility.java:464)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.getExtensionsWithServer(ExtensionUtility.java:550)
+	at org.eclipse.wst.server.discovery.Discovery.getExtensionsWithServer(Discovery.java:38)
+	at org.eclipse.wst.server.core.ServerCore.createProxyServers(ServerCore.java:328)
+	at org.eclipse.wst.server.core.ServerCore.loadDAServerTypes(ServerCore.java:302)
+	at org.eclipse.wst.server.core.ServerCore.getDownloadableServers(ServerCore.java:169)
+	at org.eclipse.wst.server.ui.internal.viewers.ServerTypeTreeContentProvider.deferredAdapterInitialize(ServerTypeTreeContentProvider.java:149)
+	at org.eclipse.wst.server.ui.internal.viewers.AbstractTreeContentProvider$1.run(AbstractTreeContentProvider.java:58)
+Caused by: java.io.IOException: Premature end of file.
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry$Parser.parse(SimpleProfileRegistry.java:756)
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry$Parser.parse(SimpleProfileRegistry.java:742)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:119)
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.loadProfile(LazyProfileRegistry.java:325)
+	... 14 more
+Caused by: org.xml.sax.SAXParseException; lineNumber: 56605; columnNumber: 767; Premature end of file.
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1251)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry$Parser.parse(SimpleProfileRegistry.java:753)
+	... 19 more
+
+!ENTRY org.eclipse.oomph.p2.core 2 0 2022-05-26 13:28:31.315
+!MESSAGE The file C:\Users\DELL\.p2\org.eclipse.equinox.p2.engine\profileRegistry\C__Users_DELL_eclipse_jee-2022-03_eclipse.profile\1653396162045.profile.gz of length 364480 failed to load properly
+!STACK 0
+org.eclipse.oomph.util.IORuntimeException: The file C:\Users\DELL\.p2\org.eclipse.equinox.p2.engine\profileRegistry\C__Users_DELL_eclipse_jee-2022-03_eclipse.profile\1653396162045.profile.gz of length 364480 failed to load properly
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.loadProfile(LazyProfileRegistry.java:333)
+	at org.eclipse.oomph.p2.internal.core.LazyProfile.getDelegate(LazyProfile.java:78)
+	at org.eclipse.oomph.p2.internal.core.LazyProfile.getDelegate(LazyProfile.java:98)
+	at org.eclipse.oomph.p2.internal.core.LazyProfile.snapshot(LazyProfile.java:318)
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.getProfiles(LazyProfileRegistry.java:149)
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.getProfiles(LazyProfileRegistry.java:131)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.getExistingFeatures(ExtensionUtility.java:418)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.getAllExtensions(ExtensionUtility.java:486)
+	at org.eclipse.wst.server.discovery.internal.ExtensionUtility.refreshServerAdapters(ExtensionUtility.java:683)
+	at org.eclipse.wst.server.discovery.Discovery.refreshServerAdapters(Discovery.java:68)
+	at org.eclipse.wst.server.ui.ServerUIUtil$1RefreshJob.run(ServerUIUtil.java:109)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.io.IOException: Premature end of file.
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry$Parser.parse(SimpleProfileRegistry.java:756)
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry$Parser.parse(SimpleProfileRegistry.java:742)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:119)
+	at org.eclipse.oomph.p2.internal.core.LazyProfileRegistry.loadProfile(LazyProfileRegistry.java:325)
+	... 11 more
+Caused by: org.xml.sax.SAXParseException; lineNumber: 56605; columnNumber: 767; Premature end of file.
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1251)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry$Parser.parse(SimpleProfileRegistry.java:753)
+	... 16 more
+
+!ENTRY org.eclipse.equinox.p2.repository 2 0 2022-05-26 13:28:42.518
+!MESSAGE Using unsafe http transport to retrieve http://download.jboss.org/jbosstools/static/photon/stable/updates/core/4.23.0.Final/content.xml.xz, see CVE-2021-41033. Consider using https instead.
+
+!ENTRY org.eclipse.equinox.p2.repository 2 0 2022-05-26 13:28:42.996
+!MESSAGE Using unsafe http transport to retrieve http://download.jboss.org/jbosstools/static/photon/stable/updates/central/4.23.0.Final/content.xml.xz, see CVE-2021-41033. Consider using https instead.
+
+!ENTRY org.eclipse.equinox.p2.repository 2 0 2022-05-26 13:28:43.134
+!MESSAGE Using unsafe http transport to retrieve http://download.jboss.org/jbosstools/targetplatforms/jbtcentraltarget/4.23.0.AM1-SNAPSHOT/REPO/, see CVE-2021-41033. Consider using https instead.
+
+!ENTRY org.jboss.tools.quarkus.lsp4e 4 0 2022-05-26 13:29:04.139
+!MESSAGE Servers does not exist
+!STACK 1
+Java Model Exception: Error in Java Model (code 969): Servers does not exist
+	at org.eclipse.jdt.internal.core.JavaElement.newJavaModelException(JavaElement.java:584)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:254)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:328)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:314)
+	at org.eclipse.jdt.internal.core.JavaProject.getJavaProjectElementInfo(JavaProject.java:2131)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2867)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2861)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2879)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2871)
+	at org.eclipse.jdt.internal.core.JavaProject.findType(JavaProject.java:1776)
+	at org.eclipse.jdt.internal.core.JavaProject.findType(JavaProject.java:1677)
+	at org.jboss.tools.quarkus.lsp4e.internal.qute.QuteProjectListener.configureProject(QuteProjectListener.java:62)
+	at org.jboss.tools.quarkus.lsp4e.internal.qute.QuteProjectListener.handleEvent(QuteProjectListener.java:76)
+	at org.eclipse.core.internal.resources.Workspace.broadcastEvent(Workspace.java:376)
+	at org.eclipse.core.internal.resources.Project.startup(Project.java:1310)
+	at org.eclipse.core.internal.resources.Project.open(Project.java:1070)
+	at org.eclipse.core.internal.resources.Project.open(Project.java:1112)
+	at org.eclipse.wst.server.core.internal.ServerType.getServerProject(ServerType.java:312)
+	at org.eclipse.wst.server.core.internal.ServerWorkingCopy.save(ServerWorkingCopy.java:428)
+	at org.eclipse.wst.server.ui.internal.wizard.WizardTaskUtil.tempSaveServer(WizardTaskUtil.java:153)
+	at org.eclipse.wst.server.ui.internal.wizard.WizardTaskUtil$4.performFinish(WizardTaskUtil.java:65)
+	at org.eclipse.wst.server.ui.internal.wizard.TaskWizard.executeTask(TaskWizard.java:270)
+	at org.eclipse.wst.server.ui.internal.wizard.TaskWizard$2.run(TaskWizard.java:217)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2313)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2333)
+	at org.eclipse.wst.server.ui.internal.wizard.page.WorkspaceRunnableAdapter.run(WorkspaceRunnableAdapter.java:37)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2022-05-26 13:29:04.140
+!MESSAGE Servers does not exist
+
+!ENTRY org.jboss.tools.quarkus.lsp4e 4 0 2022-05-26 13:29:53.494
+!MESSAGE Request Quote Mobile App does not exist
+!STACK 1
+Java Model Exception: Error in Java Model (code 969): Request Quote Mobile App does not exist
+	at org.eclipse.jdt.internal.core.JavaElement.newJavaModelException(JavaElement.java:584)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:254)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:328)
+	at org.eclipse.jdt.internal.core.JavaElement.getElementInfo(JavaElement.java:314)
+	at org.eclipse.jdt.internal.core.JavaProject.getJavaProjectElementInfo(JavaProject.java:2131)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2867)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2861)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2879)
+	at org.eclipse.jdt.internal.core.JavaProject.newNameLookup(JavaProject.java:2871)
+	at org.eclipse.jdt.internal.core.JavaProject.findType(JavaProject.java:1776)
+	at org.eclipse.jdt.internal.core.JavaProject.findType(JavaProject.java:1677)
+	at org.jboss.tools.quarkus.lsp4e.internal.qute.QuteProjectListener.configureProject(QuteProjectListener.java:62)
+	at org.jboss.tools.quarkus.lsp4e.internal.qute.QuteProjectListener.handleEvent(QuteProjectListener.java:76)
+	at org.eclipse.core.internal.resources.Workspace.broadcastEvent(Workspace.java:376)
+	at org.eclipse.core.internal.resources.Project.startup(Project.java:1310)
+	at org.eclipse.core.internal.resources.Project.open(Project.java:1070)
+	at org.eclipse.ui.internal.wizards.datatransfer.SmartImportJob.toExistingOrNewProject(SmartImportJob.java:556)
+	at org.eclipse.ui.internal.wizards.datatransfer.SmartImportJob.run(SmartImportJob.java:252)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.jdt.core 4 969 2022-05-26 13:29:53.494
+!MESSAGE Request Quote Mobile App does not exist

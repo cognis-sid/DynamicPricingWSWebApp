@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>DynamicPricingWSWebApp</display-name>
+	<welcome-file-list>
+		<welcome-file>RrcGenericSrv?service=common.RcmLoginSvc</welcome-file>
+	</welcome-file-list>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext-jdbc.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>resteasy.scan</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>resteasy.scan.resources</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>resteasy.scan.providers</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+		<servlet>
+		<servlet-name>GetMailProperticeServlet</servlet-name>
+		<servlet-class>com.rclgroup.dolphin.web.email.GetMailProperticeServlet</servlet-class>
+		 <load-on-startup>1</load-on-startup>  
+	</servlet>
+	
+	
+	<servlet>
+		<servlet-name>RrcGenericSrv</servlet-name>
+		<servlet-class>com.rclgroup.dolphin.web.common.RrcGenericSrv</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>RrcGenericLinkMenuSrv</servlet-name>
+		<servlet-class>com.rclgroup.dolphin.web.common.RrcGenericLinkMenuSrv</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>RrcStandardSrv</servlet-name>
+		<servlet-class>com.rclgroup.dolphin.web.common.RrcStandardSrv</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RrcGenericSrv</servlet-name>
+		<url-pattern>/RrcGenericSrv</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RrcGenericLinkMenuSrv</servlet-name>
+		<url-pattern>/RrcGenericLinkMenuSrv</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RrcStandardSrv</servlet-name>
+		<url-pattern>/RrcStandardSrv</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CORS Filter</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>com.rclgroup.dolphin.web.ws</param-value>
+		</init-param>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>com.rclgroup.dolphin.web.ws.BlcApplication</param-value>
+		</init-param>
+		<init-param>
+			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		
+		<init-param>
+        <param-name>jersey.config.server.provider.packages</param-name>
+        <param-value>com.rclgroup.dolphin.web.model</param-value>
+    </init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CORS Filter</servlet-name>
+		<url-pattern>/rclws/*</url-pattern>
+		
+	</servlet-mapping>
+
+<filter>
+        <filter-name>ResponseFilter</filter-name>
+         <filter-class>com.rclgroup.dolphin.web.filter.ResponseFilter</filter-class>
+    </filter>  
+
+    <filter-mapping>
+       <filter-name>ResponseFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+     </filter-mapping>
+     
+
+
+
+</web-app>

@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <base href="./" />
+    <title>RCL</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+ <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="css/loader.css" crossorigin="anonymous">
+
+ <link rel="stylesheet" href="css/mobile-angular-ui-hover.min.css" />
+    <link rel="stylesheet" href="css/mobile-angular-ui-base.min.css" />
+    <link rel="stylesheet" href="css/mobile-angular-ui-desktop.min.css" />
+<link rel="stylesheet" href="rcl.css" type="text/css">
+
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/mobile-angular-ui.min.js" type="text/javascript"></script>
+<script src="js/mobile-angular-ui.gestures.min.js" type="text/javascript"></script> 
+ 
+ <script src="js/mobile-angular-ui.core.min.js"></script>
+ <script src="js/jquery.min.js"></script>
+ <link href="css/select2.min.css" rel="stylesheet" />
+ <script src="js/select2.min.js"></script>
+ <script id='example-js' type="text/javascript">
+ 
+ app = angular.module('myApp', ['mobile-angular-ui', 'mobile-angular-ui.gestures','ngRoute']);
+ 
+ app.config(function($routeProvider) {
+	$routeProvider
+		.when('/', {
+			templateUrl: 'login.html',
+			controller: 'login'
+		})
+		.when('/forget', {
+			templateUrl: 'foretpassword.html',
+			controller: 'forget'
+		}).when('/dashBord', {
+			templateUrl: 'dashBord.html',
+			controller: 'dashBord'
+		}).when('/create', {
+			templateUrl: 'create.html',
+			controller: 'create'
+		}).when('/dynamicPricing', {
+			templateUrl: 'dynamicPricing.html',
+			controller: 'dynamicPricing'
+		}).when('/portData', {
+			templateUrl: 'portData.html',
+			controller: 'portData'
+		}).when('/summary', {
+			templateUrl: 'summary.html',
+			controller: 'summary'
+		}).when('/registration', {
+			templateUrl: 'registration.html',
+			controller: 'registration'
+		}).otherwise({
+			redirectTo: '/home1'
+		});
+});
+ 
+ 
+
+ 
+ 
+app.controller('dashBord', function($scope,$window,$rootScope,$http,$location) {
+$scope.dialog={deleteDialobConfirm:false,searchDialog:false,openDialog:false,reSubmitDialog:false};
+$rootScope.newRate=0;
+$rootScope.selectedId=-1;
+$scope.sendData ={pod:"-1",pol:"-1"};
+   
+
+  $rootScope.searchResult = [];
+
+$scope.go = function ( path ) {
+
+  $location.path( path );
+};
+
+
+
+$scope.oninit = function ( ) {
+
+ $('#podSearch').select2({
+			placeholder: 'Select POD..'
+		});
+		$('#polSearch').select2({
+			placeholder: 'Select POL..'
+		});
+};
+
+ 
+$scope.openDeleteDialog = function ( id) {
+	$rootScope.selectedId=id;
+    $scope.dialog.deleteDialobConfirm=true;
+	$scope.dialog.openDialog=true;
+};
+ 
+ 
+$scope.openResubmitialog = function ( id) {
+	$rootScope.selectedId=id;
+    $scope.dialog.reSubmitDialog=true;
+	$scope.dialog.openDialog=true;
+};
+
+$scope.openSearch = function ( item) {
+	
+   $scope.dialog.searchDialog=true;
+   $scope.dialog.openDialog=true;
+};
+
+
+$scope.closeDialog = function () {
+	$scope.dialog.deleteDialobConfirm=false;  
+	$scope.dialog.searchDialog=false;
+	$scope.dialog.openDialog=false;   
+	$scope.dialog.reSubmitDialog=false;   
+	
+};
+ 
+
+$scope.resetDialog=function(){
+	$scope.sendData ={pod:"-1",pol:"-1"};
+	$("#polSearch").select2().val("-1");
+	$("#polSearch").select2().val();
+	$("#podSearch").select2().val("-1");
+	$("#podSearch").select2().val();
+	$rootScope.logoutTime=new Date();
+}
+
+$rootScope.getDashBordData=function (from){
+	var sendData =JSON.parse(JSON.stringify($rootScope.userInfo));
+	if(!from){
+		
+		$scope.sendData.pol=$("#polSearch").val();
+		$scope.sendData.pod=$("#podSearch").val()
+	 
+	
+		if(!($scope.sendData.pod==-1 || $scope.sendData.pod=="" ||  $scope.sendData.pod.indexOf("undefined:undefined")!=-1)){
+			sendData["pod"]=$scope.sendData.pod;
+		}
+		if(!($scope.sendData.pol==-1 || $scope.sendData.pol=="" ||  $scope.sendData.pol.indexOf("undefined:undefined")!=-1)){
+			sendData["pol"]=$scope.sendData.pol;
+		}
+		sendData["vessel"]=$scope.sendData.vessel
+		sendData["voyage"]=$scope.sendData.voyage
+		sendData["requestId"]=$scope.sendData.requestId;
+		sendData["approvedId"]=$scope.sendData.approvedId
+		sendData["targetEtd"]=$scope.sendData.targetEtd
+		var d=sendData["targetEtd"];
+		if(d){
+			sendData["targetEtd"]=d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
+		}
+	  }	$( "body" ).append('<div class="loading"></div>');
+		$http({
+				method : "POST",
+				async : true,
+				url : $rootScope.url+"rclMobile/searchData",
+				 
+						processData : false,
+						data : sendData,
+			  }).then(function(result, status, headers, config) {	
+				$("body").find('.loading').remove();
+				$rootScope.searchResult = result.data.data;
+				$rootScope.logoutTime=new Date();	
+					  
+					console.log(result);
+					$scope.closeDialog();
+							// alert(result);
+							
+			},function(){
+				$location.path( "/" );
+				$("body").find('.loading').remove();
+			
+			});
+}
+
+
+$rootScope.newRateRequest=function (newRate){
+	var sendData =JSON.parse(JSON.stringify($rootScope.userInfo));
+	 
+		 
+		sendData["id"]=$rootScope.selectedId;
+		sendData["targetRate"]=newRate;
+		
+		 $( "body" ).append('<div class="loading"></div>');
+	  
+		$http({
+				method : "POST",
+				async : true,
+				url : $rootScope.url+"rclMobile/updateTargetEtd",
+				 
+						processData : false,
+						data : sendData,
+			  }).then(function(result, status, headers, config) {	
+				$("body").find('.loading').remove();
+					$scope.closeDialog();
+					$rootScope.getDashBordData(1);
+							// alert(result);
+					$rootScope.logoutTime=new Date();
+							
+			},function(){
+				 $("body").find('.loading').remove();
+			
+			});
+}
+
+
+$rootScope.deleteRequest=function (id){
+	var sendData =JSON.parse(JSON.stringify($rootScope.userInfo));
+	 
+		 
+		sendData["id"]=$rootScope.selectedId;
+		 $( "body" ).append('<div class="loading"></div>');
+	  
+		$http({
+				method : "POST",
+				async : true,
+				url : $rootScope.url+"rclMobile/deleteRequest",
+				 
+						processData : false,
+						data : sendData,
+			  }).then(function(result, status, headers, config) {	
+				$("body").find('.loading').remove();
+					$scope.closeDialog();
+					$rootScope.getDashBordData(1);
+							// alert(result);
+					$rootScope.logoutTime=new Date();
+							
+			},function(){
+				 $("body").find('.loading').remove();
+			
+			});
+}
+
+
+
+ $rootScope.getDashBordData(1);
+ 
+});
+
+// edn of dashBord
+
+
+app.controller('create', function($scope,$window,$rootScope,$http,$location) {  
+$scope.message="Quote has been created successfully";
+$scope.messageTitle="Success";
+$scope.scrollItems =[{index:0}]
+$scope.showDialog = false;
+
+$scope.sendData ={pol:"-1",pod:"-1"};
+
+
+$scope.basicAutoComplete = function (  ) {
+				
+		$('#pod').select2({
+			placeholder: 'Select POD..'
+		});
+		$('#pol').select2({
+			placeholder: 'Select POL..'
+		});
+				
+		 $('.basicAutoComplete').select2({
+			placeholder: 'Select Shipper..',
+			minimumInputLength: 3,
+			ajax: {
+			method : "GET",
+			url: $rootScope.url+"rclMobile/filterShipper",
+			data: function (params) {
+				var query=JSON.parse(JSON.stringify($rootScope.userInfo))
+				for(var key in $scope.sendData){
+				query[key]=$scope.sendData[key];
+				} 
+				query["companyName"]= params.term;
+				// Query parameters will be ?search=[term]&type=public
+				return query;
+			},
+			processResults: function (data) {
+				console.log(data);
+			// Transforms the top-level key of the response object from 'items' to 'results'
+			  return {
+				results: data.shipperList
+			  };
+			}
+		}
+		  
+		})
+	};
+	
+	$scope.go = function ( path ) {
+		$location.path( path );
+	};
+
+	 
+$scope.closeDialog = function (  ) {
+		$scope.showDialog = false;
+		$rootScope.logoutTime=new Date();
+	};
+ 
+
+	$scope.onSubmit=function (form){
+	
+	$scope.sendData.pol=$("#pol").val();
+	$scope.sendData.pod=$("#pod").val()
+	if($scope.sendData.pol==-1 || $scope.sendData.pol=="" ||  $scope.sendData.pol.indexOf("undefined:undefined")!=-1){
+		$scope.message="Please select Pol";
+		$scope.messageTitle="Error";
+		$scope.showDialog = true;
+		return ;
+	}
+	if($scope.sendData.pod==-1 || $scope.sendData.pod=="" ||  $scope.sendData.pod.indexOf("undefined:undefined")!=-1){
+		$scope.message="Please select Pod";
+		$scope.messageTitle="Error";
+		$scope.showDialog = true;
+		return ;
+	}
+	 
+	if($scope.sendData.pol==$scope.sendData.pod){
+		$scope.message="Pod and Pol can not be same";
+		$scope.messageTitle="Error";
+		$scope.showDialog = true;
+		return ;
+	}
+	
+	if($scope.sendData.remarks && $scope.sendData.remarks.length>100){
+		$scope.message="Please enter remarks must be less than 100 character";
+		$scope.messageTitle="Error";
+		$scope.showDialog = true;
+		return ;
+	}
+	if(!form.$valid) {
+     return;
+	}
+	
+	var data=JSON.parse(JSON.stringify($rootScope.userInfo))
+	for(var key in $scope.sendData){
+		data[key]=$scope.sendData[key];
+	}
+	//data["shipper"]=$(".basicAutoComplete").val();
+	var d=data["targetEtd"];
+	if(d){
+		data["targetEtd"]=d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
+	}
+	//$scope.sendData["browserData"]=$rootScope.userInfo.browserData; 
+	 $( "body" ).append('<div class="loading"></div>');
+		$http({
+				method : "POST",
+				async : true,
+				url : $rootScope.url+"rclMobile/create",
+				 
+						processData : false,
+						data : data,
+			  }).then(function(result, status, headers, config) {	
+					$("body").find('.loading').remove();
+				  $scope.showDialog = true;
+				  $scope.messageTitle="Success";
+				  $scope.message="Quote has been created successfully";
+							
+			},function(){
+				$location.path( "/" );
+				$("body").find('.loading').remove();
+			});
+	}
+
+
+ 
+	 
+
+});
+
+// edn of create
+
+
+app.controller('edit', function($scope,$window,$rootScope,$http,$location) {  
+$scope.pol="-1";
+$scope.pod="-1"
+$scope.scrollItems =[{index:0}]
+
+$scope.go = function ( path ) {
+  $location.path( path );
+};
+
+
+
+
+
+$scope.onSubmit = function ( ) {
+
+ $scope.showDialog = true;
+};
+
+ 
+});
+
+
+//end of Edit
+app.controller('bottomMenu', function($scope,$window,$rootScope,$http,$location) {
+
+$rootScope.isLogin = false;
+ 
+$rootScope.shipperList=[];
+$rootScope.polNameArray=[];
+
+$rootScope.userInfo={userId:'DEV_TEAM',browserData:{userId:"DEV_TEAM"}};
+$rootScope.url='https://eservice.rclgroup.com/RequestQuoteWSWebApp/rclws/';
+//$rootScope.url='http://localhost:8080/RequestQuoteWSWebApp/rclws/';
+
+  
+	
+$scope.showSearchFun = function ( ) {
+
+  $rootScope.showSearchInput = !$rootScope.showSearchInput;
+};
+
+$scope.go = function ( path ) {
+
+  $location.path( path );
+};
+
+$scope.showpages= function(){
+
+	
+	if($rootScope.isLogin){
+			$location.path("/dashBord");
+			//alert($rootScope.isLogin);
+	}else{
+	$scope.go("/");
+	}
+}
+
+
+$scope.logout= function()
+	{
+		$scope.go("/");
+		 
+		$rootScope.isLogin = false;
+		$rootScope.selectedItem=null
+	}
+});
+
+
+app.controller('login', function($scope,$window,$rootScope,$http,$location,$interval) {
+$scope.emailId;
+$scope.pass={};
+$scope.showDialog=false;
+$rootScope.isSucessLogin=false;
+$rootScope.logoutTime=null;
+$rootScope.isServerError=false;
+
+$scope.go = function ( path ) {
+	
+	if(path=="/dashBord"){
+		$rootScope.isLogin=true;
+		
+	}
+  $location.path( path );
+};
+
+$scope.callAtInterval =function () {
+	var date=new Date();
+	var diff=-1;
+	if($rootScope.logoutTime != null ){
+		diff=date.getTime()-$rootScope.logoutTime.getTime()
+	}
+	//3600000
+	if(diff>1800000){
+		console.log("Interval occurred",diff);
+		$scope.go("/");
+		
+	}
+}
+
+$rootScope.errorDialog=function (data){
+	$rootScope.isServerError=true;
+}
+
+$scope.sendReqLogin=function() {
+		
+		
+		var fileData={"emailId":$rootScope.userInfo.userId,"userId":$rootScope.userInfo.userId,"passwordToken":$scope.pass.token,"tokenId":$rootScope.userInfo.tokenId,"mobileApp":true};		  
+		console.log("sen datra",fileData);
+		$( "body" ).append('<div class="loading"></div>');
+		$http({
+				method : "POST",
+				async : true,
+				url : $rootScope.url+"rclMobile/validateToken",				
+				processData : false,
+				data : fileData,
+			  }).then(function(result, status, headers, config) {			 
+							  $("body").find('.loading').remove();
+							 if(result.data.status){
+								 console.log($rootScope.userInfo);
+								$rootScope.isSucessLogin=true;
+								$scope.go('/dashBord');
+								$rootScope.logoutTime=new Date();
+								$scope.showDialog=false;
+								$rootScope.isSucessLogin=false;
+							 }else{
+								 
+								$scope.showDialog=true;
+							 }
+							 
+							
+			},function(){
+				 
+				$("body").find('.loading').remove();
+			});
+	}
+
+$scope.sendReq=function() {
+		
+		
+		$interval($scope.callAtInterval, 900000);
+		var fileData={"emailId":$scope.emailId,"pass":$scope.password,"userId":$scope.emailId};		  
+		$( "body" ).append('<div class="loading"></div>');
+		$http({
+				method : "POST",
+				async : true,
+				url : $rootScope.url+"rclMobile/login",				
+				processData : false,
+				crossDomain: true,
+				data : fileData,
+			  }).then(function(result, status, headers, config) {			 
+								$("body").find('.loading').remove();
+							 if(result.data.status){
+								$rootScope.userInfo={"userId":result.data.userId,browserData:{"userId":result.data.userId},tokenId:result.data.tokenId,"emailId":result.data.emailId,"mobileApp":true};
+								$rootScope.userInfo["fsc"]=result.data.fsc;
+								console.log($rootScope.userInfo);
+								$rootScope.isSucessLogin=true;
+								$rootScope.polNameArray=result.data.pods;
+								$rootScope.shipperList=result.data.shipperList;
+								//$scope.go('/dashBord');
+								//$scope.showDialog=false;
+								if(result.data.userId && result.data.userId.toLowerCase()=="admin"){
+									$rootScope.isSucessLogin=true;
+								$scope.go('/dashBord');
+								 
+								$scope.showDialog=false;
+								$rootScope.isSucessLogin=false;
+								}
+								
+							 }else{
+								 
+								$scope.showDialog=true;
+							 }
+							 
+							
+			},function(data,d){
+				$("body").find('.loading').remove();
+				//alert(JSON.stringify(data));
+				
+			});
+	}
+	
+	$scope.closeDialog = function(){
+		 
+		$scope.showDialog=false;
+	}
+
+});
+	
+	
+	
+	
+app.controller('forget', function($scope,$window,$rootScope,$http,$location) {
+
+$scope.go = function ( path ) {
+
+  $location.path( path );
+};	 
+	});
+
+	 // Start of Dynamic Pricing
+	app.controller('dynamicPricing', function ($scope,$window,$rootScope,$http,$location) {
+		$scope.showButton = false;
+		$rootScope.details=[];
+		var data = { "userId": "XMEN004" };
+		$scope.portData = [
+                    { portCode : $scope.portCode}
+				];
+
+		$scope.onShow = function () {
+			$scope.showButton = !$scope.showButton;
+		};
+
+		$scope.openPortData = function (path) {
+			$location.path(path);
+		
+				
+		};
+		
+
+ 		
+
+		$scope.openSummary = function (path) {
+			$location.path(path);
+		};
+
+	});
+ // end of Dynamic Pricing
+
+
+  // Start of Port Data
+	app.controller('portData', function ($scope,$window,$rootScope,$http,$location) {
+		$scope.newItem = false;
+		
+		var data = { "userId": "XMEN004" };
+		$scope.onLoad=function(){
+			$http.post("http://localhost:8080/DynamicPricingWSWebApp/rclws/rclDynamicPricing/getPortData", JSON.stringify(data))
+				.then(function (response) {
+					$rootScope.details = response.data;
+					console.log($rootScope.details[0]['portCode']);
+					$rootScope.pdata = $rootScope.details[0]['portCode'];
+					
+				
+				// console.log("new",$rootScope.pdata)
+				// $rootScope.poData = { "portCode": $rootScope.pdata };
+				// $http.post("http://localhost:8080/DynamicPricingWSWebApp/rclws/rclDynamicPricing/getTerminalData",JSON.stringify($rootScope.poData) )
+				// .then(function (response) {
+				// 	$rootScope.terminalData=[];
+				// 	$rootScope.terminalData= response;
+				// 	$scope.loading = false
+				// 	consloe.log($rootScope.terminalData)
+				// });
+			});
+		};
+		$scope.addNewItem = function () {
+			$scope.newItem = true;
+		};
+		$scope.termianalData= function(portCode){
+			var pdata = { "portCode": portCode};
+			$http.post("http://localhost:8080/DynamicPricingWSWebApp/rclws/rclDynamicPricing/getTerminalData",JSON.stringify(pdata) )
+				.then(function (response) {
+					$rootScope.terminalData = response.data;
+					$scope.loading = false;
+				});
+			 console.log(portCode);
+		 };
+	});
+ // End of Port Data
+
+// Start of Regitration
+app.controller('registration',function($scope,$http,$location){
+	$scope.secPage = false;
+	$scope.firstPage = true;
+
+	$scope.saveRegData = function () {
+		$http.post("http://localhost:8080/DynamicPricingWSWebApp/rclws/registrationServices/saveRegData")
+			.then(function (response) {
+				$scope.details = response.data;
+				$scope.loading = false;
+			});
+	};
+
+	$scope.secondPage = function () {
+		$scope.secPage = true;
+		$scope.firstPage = false;
+
+	};
+	$scope.previousPage = function () {
+		$scope.secPage = false;
+		$scope.firstPage = true;
+	};
+
+});
+// End of Registration 
+
+
+
+
+</script>
+</head>
+<body ng-app="myApp" id='example-html'   ui-prevent-touchmove-defaults> 
+
+
+  
+
+ 
+ <div class="app" >
+
+      <!-- Navbars -->
+
+      <div class="navbar navbar-app navbar-absolute-top" >
+			
+	   <div class="flex-container">
+		<div class="logo-container flex-item" >
+			  <a href="#"><img src="images/rcl_logo.png" alt="rcl-logo"></a>
+			</div>
+			<div class="section-blue flex-item"  style="width:100%;">
+			   <div style="margin:0% 10% 0% 5%;color:white;text-align:center;width:100%;" class="login-header-text">	   
+					Quotation Request
+					
+			   </div>
+			  
+			   
+			</div>
+			
+			
+         
+		
+		</div>
+
+      </div>
+
+       
+
+      <!-- App Body -->
+       <div class="app-body" ng-class="{loading: loading}">
+        <div ng-show="loading" class="app-content-loading">
+          <i class="fa fa-spinner fa-spin loading-spinner"></i>
+        </div>
+        <div class="app-content">
+          <ng-view></ng-view>
+        </div>
+      </div>
+	  
+
+	  <div class="navbar-absolute-bottom" >
+	  <footer ng-controller="bottomMenu">	 
+	
+        <div class="btn-group justified">
+          <a  ng-click="showpages('/')" class="btn btn-navbar"><i class="fa fa-home fa-navbar"></i> Home</a>
+          <a  href="https://www.rclgroup.com/" class="btn btn-navbar" style='font-size:8px;'> &copy; 2021 RCL| All Rights Reserved.</a>
+		  
+		  
+		   
+		  
+         <a  ng-click="logout('/')" class="btn btn-navbar pull-right" ><i  ng-if="isLogin" class="fa fa-power-off fa-navbar fa-lg"></i></a>
+        </div>
+		</footer>
+      
+	  
+    </div>
+  
+  
+</div>
+<div ui-yield-to="modals" ></div>
+<style>
+
+
+
+.login-header-text {
+    width: 80%;
+    padding-top:8px;
+    margin: 0 auto;
+    font-family: SourceSansPro-Bold;
+    font-size: 20px;
+    line-height:40px;
+    color: white;
+}
+
+.flex-container {  
+  display: flex; 
+  width:100%;
+   
+}
+
+.flex-item {   
+  padding: 5px;  
+  
+}
+	.section-white {
+    height: 25px;
+    background-color: #ffffff;
+  }
+  
+  .section-blue {
+    height: 60px;
+    background-color: #004b8e;
+  }
+  
+</style>
+</body>
+</html>

@@ -1,0 +1,438 @@
+
+
+<div class="scrollable" ui-shared-state="searchBar">
+<br>
+<div style="margin-top:10px;margin-left:10px;" >
+  <span style="font-weight:500; font-size:12px;">List of Quotation</span>
+	<i class="fa fa-plus-square pull-right fa-lg" aria-hidden="true" style="margin-right:20px;" title="Create Request Quote" ng-click="go('/create')"></i>
+	<i class="fa fa-search pull-right fa-lg" aria-hidden="true" style="margin-right:20px;" title="Search" ng-click="openSearch()"></i>
+	<i class="fa fa-refresh pull-right fa-lg" aria-hidden="true" style="margin-right:20px;" title="Refresh" ng-click="getDashBordData(1)"></i>
+	 
+</div>
+   
+
+	
+	
+  <div class="scrollable-content" ui-scroll-bottom="bottomReached()">
+  
+   <div class="section">
+      <div class="panel-group" 
+        
+        ui-shared-state="myAccordion" 
+        ui-default='1'>
+		
+  <div class="panel panel-default" ng-repeat="item in searchResult">
+  
+          <div class="panel-heading" ui-set="{'myAccordion': item.seq}" ng-style="{ 'background-color' : (item.statusId == 'A') ? '#D1f9cd' : (item.statusId == 'S') ?'#FAFFCC' :(item.statusId == 'P') ?'#Ccdcff':'#F9D2D5' }">
+			<div class="flex-container"   >
+				<div class="flex-item1" >{{ item.pol }} - {{ item.pod }} </div>
+				
+				<!--div class="flex-item1" ><span style="font-weight:500;">Validity :</span>{{ item.validity }} </div-->
+			</div>
+				<i ui-if="myAccordion != {{item.seq}}" class="fa fa-chevron-right  pull-right  " style="margin-top:-20px;" ></i>
+				<i ui-if="myAccordion == {{item.seq}}" class="fa fa-chevron-down  pull-right  " style="margin-top:-20px;" ></i>
+				
+				<i class="fa fa-trash  pull-right fa-lg" ng-if="item.statusId == 'S'" style="margin-top:-20px;margin-right:20px;" ng-click="openDeleteDialog(item.id);"></i>
+				<i class="fa fa-pencil-square-o pull-right fa-lg" ng-if="item.statusId == 'R'" style="margin-top:-20px;margin-right:20px;" ng-click="openResubmitialog(item.id);"></i>
+				
+          </div>
+		
+          <div ui-if="myAccordion == {{item.seq}}">
+            <div class="panel-body">        
+			   
+			    
+			   
+			   <div class="container">
+				  <div class="row">
+					<div class="w-10">
+						 <span class="headerSize">Pol:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ (item.pol) }}
+					</div>
+					 
+				   <div class="w-10">
+						 <span class="headerSize">Pod:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ (item.pod) }}
+					</div>
+					
+				  </div>
+			  </div>
+			  
+			  
+			  <div class="container">
+				  <div class="row">
+					<div class="w-10">
+						 <span class="headerSize">Weight:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.weight }}
+					</div>
+					 
+				   <div class="w-10">
+						 <span class="headerSize">Weekly volume:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.weeklyVolume }}
+					</div>
+					
+				  </div>
+			  </div>
+			  
+			  <div class="container">
+				  <div class="row">
+					<div class="w-10">
+						 <span class="headerSize">Vessel:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.vessel }}
+					</div>
+					 
+				   <div class="w-10">
+						 <span class="headerSize">Voyage:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.voyage }}
+					</div>
+					
+				  </div>
+			  </div>
+			  
+			  
+			  <div class="container">
+				  <div class="row">
+					<div class="w-10">
+						 <span class="headerSize">Comodity:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.cmodity }}
+					</div>
+					 
+				   <div class="w-10">
+						 <span class="headerSize">Shipper:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.shipper }}
+					</div>
+					
+				  </div>
+			  </div>
+			  
+			   <div class="container">
+				  <div class="row">
+					<div class="w-10">
+						 <span class="headerSize">Dest  F/T:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.freeTime }}
+					</div>
+					 
+				   <div class="w-10">
+						 <span class="headerSize">Status:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.stausAsString }}
+					</div>
+					
+				  </div>
+			  </div>
+			  
+			    <div class="container">
+				  <div class="row">
+					<div class="w-10">
+						 <span class="headerSize">Target Rate:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.targetRate }}
+					</div>
+					 
+				   <div class="w-10">
+						 <span class="headerSize">Target etd:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.targetEtd }}
+					</div>
+					
+				  </div>
+			  </div>
+			  
+			  <div class="container">
+				  <div class="row">
+					<div class="w-10">
+						 <span class="headerSize">Request id :</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.requestId}}
+					</div>
+					 
+				   <div class="w-10">
+						 <span class="headerSize">Approval id:</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.approvedId }}
+					</div>
+					
+				  </div>
+			  </div>
+			  <div class="container">
+				  <div class="row">
+					<div class="w-12">
+						 <span class="headerSize">Contract Party :</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.contractParty}}
+					</div>
+					 
+				   
+					
+				  </div>
+			  </div>
+			  
+			   <div class="container" >
+				  <div class="row">
+					<div class="w-12">
+						 <span class="headerSize">Remarks: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.remarks}}
+					</div>
+					 
+				   
+				   
+					
+				  </div>
+			  </div>
+			  
+			  
+			  <div class="container"  ng-if="item.statusId=='R'">
+				  <div class="row">
+					<div class="w-12">
+						 <span class="headerSize">Reason Of Rejection</span>
+					
+					</div>
+					<div class="col wordWarp">
+					  {{ item.reasonOfReject}}
+					</div>
+					 
+				   
+				   
+					
+				  </div>
+			  </div>
+				
+				 
+			  
+            </div>
+          </div>
+        </div>
+		
+		 </div>
+        </div>
+		
+     
+  </div>
+
+</div>
+ 
+
+
+
+
+
+ 
+  
+  
+  <style>
+	.modal-dialog {
+    margin-top: 10%;
+}
+
+
+  </style>
+  
+  
+  		 
+  
+<style>
+
+.w-10{
+	width:20%;
+}
+.headerSize{
+	    font-weight: 580;
+    font-size: 11.2px;
+	
+}
+
+.flex-container {  
+  display: flex; 
+   
+}
+
+.flex-item1 {   
+     padding: 2px;  
+  
+}
+
+.wordWarp{
+	word-break:break-all;
+}
+
+.container {
+    
+    border-bottom: solid 1px #c5c5c5;
+	background-color: #fafafa;
+	}
+	
+	
+	.modal-header {
+    padding: 12px;
+     
+}
+</style>
+
+
+
+												
+<div ui-content-for="modals" style="margin-top:50%;" style="background-color:red;" >  
+   <div class="modal"  ui-shared-state="modal1"  ng-if="dialog.openDialog" >
+  <div class="modal-backdrop in"></div>
+  
+  <div class="modal-dialog" ng-if="dialog.deleteDialobConfirm">
+    <div class="modal-content">
+      <div class="modal-header">
+         
+        <h4 class="modal-title">Message</h4>
+      </div>
+      <div class="modal-body">
+        <h5> Are you sure want to delete</h5>
+      </div>
+      <div class="modal-footer">
+        <button ui-turn-off="modal1" ng-click="closeDialog()" class="btn btn-default">Close</button>
+        <button ui-turn-off="modal1" ng-click="deleteRequest()" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-dialog" ng-if="dialog.reSubmitDialog">
+    <div class="modal-content">
+      <div class="modal-header">
+         
+        <h4 class="modal-title">New Target Rate</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Target Rate</label>
+          <input type="text"  ng-model="newRate"
+                 class="form-control"
+                 placeholder="Please New Target Rate" maxlength="20">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button ui-turn-off="modal1" ng-click="closeDialog()" class="btn btn-default">Close</button>
+        <button ui-turn-off="modal1" ng-click="newRateRequest(newRate)" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <div class="modal-dialog" ng-if="dialog.searchDialog">
+    <div class="modal-content">
+      <div class="modal-header">
+         
+        <h4 class="modal-title">Search</h4>
+      </div>
+      <div class="modal-body"  ng-init="oninit()">
+                   <fieldset>
+      
+        <div class="form-group has-success has-feedback">
+           
+          <select id="polSearch"  ng-model="sendData.pol"    class="form-control"  >
+					<option value="-1">Select POL..</option>
+					<option  ng-repeat="item in polNameArray" value="{{item.text}}">{{item.text}}</option>
+					  
+		</select>
+        </div>
+
+        <div class="form-group">
+          
+          <select id="podSearch"    ng-model="sendData.pod"  class="form-control"   >
+			<option value="-1">Select POD..</option>
+			<option  ng-repeat="item in polNameArray" value="{{item.text}}">{{item.text}}</option>		 
+		</select>
+        </div>
+		 
+		<div class="form-group">
+          <label>Vessel</label>
+          <input type="text"  ng-model="sendData.vessel"
+                 class="form-control"
+                 placeholder="Please enter vessel">
+        </div>
+		<div class="form-group">
+          <label>Voyage</label>
+          <input type="text"  ng-model="sendData.voyage"
+                 class="form-control"
+                 placeholder="Please enter voyage">
+        </div>
+		<div class="form-group">
+          <label>Request Id</label>
+          <input type="text"  ng-model="sendData.requestId"
+                 class="form-control"
+                 placeholder="Please enter RequestId">
+        </div>
+		<div class="form-group">
+          <label>Approved Id</label>
+          <input type="text"  ng-model="sendData.approvedId"
+                 class="form-control"
+                 placeholder="Please enter ApprovedId">
+        </div>
+		 
+
+		 
+		
+		 
+		
+		<div class="form-group">
+          <label>Target etd</label>
+          <input type="date"  ng-model="sendData.targetEtd"
+                 class="form-control"
+                 placeholder="Please enter Target etd">
+        </div>
+		 
+
+		
+    </fieldset> 
+      </div>
+      <div class="modal-footer">
+        <button ui-turn-off="modal1" ng-click="closeDialog()" class="btn btn-default">Close</button>
+		<button ui-turn-off="modal1" ng-click="resetDialog()" class="btn btn-default">Reset</button>
+		<button ui-turn-off="modal1" ng-click="getDashBordData();" class="btn btn-primary">Search</button>
+         
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+  </div>
+  

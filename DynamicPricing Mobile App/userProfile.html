@@ -1,0 +1,200 @@
+
+<div class="scrollable" ui-shared-state="searchBar">
+
+	
+	
+  <div class="scrollable-content" ui-scroll-bottom="bottomReached()">
+  
+   <div class="section">
+      <div class="panel-group" 
+        
+        ui-shared-state="myAccordion" 
+        ui-default='0'>
+		
+  <div class="panel panel-default" ng-repeat="item in scrollItems">
+  
+          <div class="panel-heading" ui-set="{'myAccordion': item.index}"  style="font-weight:500; font-size:12px;">
+				User Profile
+				 
+				
+          </div>
+		
+          <div ui-if="myAccordion == {{item.index}}">
+            <div class="panel-body">        
+			   
+			    
+	 		   
+			    
+<form role="form" ng-submit='login()'>
+    
+	
+ <fieldset>
+      
+         <div class="form-group">
+          <label>Name</label>
+          <input type="text" 
+                 class="form-control"
+				 ng-model="userData.name"
+                 placeholder="Please enter name">
+        </div>
+		<div class="form-group">
+          <label>Email</label>
+          <input type="text" 
+                 class="form-control"
+				 ng-model="userData.email"
+                 placeholder="Please enter email" readonly>
+        </div>
+		<div class="form-group">
+          <label>Password</label>
+          <input type="text" 
+                 class="form-control"
+				 ng-model="userData.password"
+                 placeholder="Please enter password">
+        </div>
+		<div class="form-group">
+          <label>Phone</label>
+          <input type="text" 
+                 class="form-control"
+				 ng-model="userData.phone"
+                 placeholder="Please enter phone">
+        </div>
+		
+		<div class="form-group">
+          <label>Company</label>
+          <input type="text" 
+                 class="form-control"
+				 ng-model="userData.company"
+                 placeholder="Please enter company">
+        </div>
+		
+		<div class="form-group">
+          <label>Addess 1</label>
+          <input type="text" 
+                 class="form-control"
+				 ng-model="userData.addess1"
+                 placeholder="Please enter addess1">
+        </div>
+
+		<div class="form-group">
+          <label>Address 2</label>
+          <input type="text" 
+                 ng-model="userData.addess2"
+				 class="form-control"
+                 placeholder="Please enter addess2">
+        </div>
+		
+		<div class="form-group">
+          <label>Addess3</label>
+          <input type="text" 
+                 class="form-control"
+				 ng-model="userData.addess3"
+                 placeholder="Please enter addess3">
+        </div>
+		
+		<div class="form-group">
+          <label>City</label>
+          <input type="text" 
+				 ng-model="userData.city"
+                 class="form-control"
+                 placeholder="Please enter city>
+        </div>
+		<div class="form-group">
+          <label>State</label>
+          <input type="text" 
+				 ng-model="userData.state"
+                 class="form-control"
+                 placeholder="Please enter state">
+        </div>
+		<div class="form-group">
+          <label>Country</label>
+           
+				 
+				 <select 
+                 ng-model="userData.country"
+                 class="form-control"
+                 >
+				<option  ng-repeat="item in countryArray" value="{{item.text}}">{{item.value}}</option>
+					
+				</select>
+        </div>
+
+		
+    </fieldset>
+    <hr>
+
+    <button class="btn btn-primary btn-block" ng-click="onSubmit()">
+      Submit
+    </button>
+
+	</form>
+			  
+				
+				 
+			  
+            </div>
+          </div>
+        </div>
+		
+		 </div>
+        </div>
+		
+    <!--div class="list-group">
+      <div  ng-repeat="item in scrollItems" href="" class="list-group-item flex-container" >
+		
+        <div class="flex-item1" ><span style="font-weight:500;">POL :</span>{{ item.pol }} </div>
+		<div class="flex-item1" ><span style="font-weight:500;">POD :</span>{{ item.pod }} </div>
+		<div class="flex-item1" ><span style="font-weight:500;">Validity :</span>{{ item.validity }} </div>
+		
+		<i class="fa fa-chevron-right pull-right"></i>
+      </div>
+    </div-->
+  </div>
+
+</div>
+
+
+
+<div ui-content-for="modals" style="margin-top:50%;">   
+   <div class="modal" ng-if="showDialog" ui-shared-state="modal1">
+  <div class="modal-backdrop in"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h4 class="modal-title">Sucess</h4>
+      </div>
+      <div class="modal-body">
+        <h5>User updated successfully</h5>
+      </div>
+      <div class="modal-footer">
+        <button ui-turn-off="modal1" ng-click="go('/dashBord')" class="btn btn-default">Close</button>
+         
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+  </div>
+
+<style>
+
+.w-10{
+	width:15%;
+}
+.headerSize{
+	font-weight:500;
+	
+}
+
+.flex-container {  
+  display: flex; 
+   
+}
+
+.flex-item1 {   
+     padding: 2px;  
+  
+}
+</style>
