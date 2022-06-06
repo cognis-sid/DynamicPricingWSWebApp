@@ -62,7 +62,17 @@
 		});
 });
  
+  
  
+app.controller('Navbars', function($scope,$window,$rootScope,$http,$location) {
+ 
+
+$scope.go = function ( path ) {
+
+  $location.path( path );
+};
+});
+
 
  
  
@@ -444,7 +454,7 @@ $scope.logout= function()
 
 app.controller('login', function($scope,$window,$rootScope,$http,$location,$interval) {
 $scope.emailId;
-$scope.pass={};
+$scope.password={};
 $scope.showDialog=false;
 $rootScope.isSucessLogin=false;
 $rootScope.logoutTime=null;
@@ -582,22 +592,13 @@ $scope.go = function ( path ) {
                     { portCode : $scope.portCode}
 				];
 
-		$scope.onShow = function () {
+		$rootScope.onShow = function () {
 			$scope.showButton = !$scope.showButton;
 		};
 
-		$scope.openPortData = function (path) {
-			$location.path(path);
-		
-				
-		};
-		
+		 
 
- 		
-
-		$scope.openSummary = function (path) {
-			$location.path(path);
-		};
+		 
 
 	});
  // end of Dynamic Pricing
@@ -683,27 +684,44 @@ app.controller('registration',function($scope,$http,$location){
 
       <!-- Navbars -->
 
-      <div class="navbar navbar-app navbar-absolute-top" >
-			
-	   <div class="flex-container">
-		<div class="logo-container flex-item" >
-			  <a href="#"><img src="images/rcl_logo.png" alt="rcl-logo"></a>
-			</div>
-			<div class="section-blue flex-item"  style="width:100%;">
-			   <div style="margin:0% 10% 0% 5%;color:white;text-align:center;width:100%;" class="login-header-text">	   
-					Quotation Request
-					
-			   </div>
-			  
-			   
-			</div>
-			
-			
-         
-		
-		</div>
+       <div class="navbar navbar-app navbar-absolute-top section-blue"  ng-controller="Navbars">
 
+    <div class="btn-group pull-left">
+      <div class="btn btn-navbar">
+        <div class="logo-container flex-item" >
+            <a ng-click = "onShow()"><img src="images/rcl_logo.png" alt="rcl-logo"></a>
+			 
+          </div>
+		
+          <div class="dynamicPricing ml-4 mt-3" ng-if="showButton" >
+            <div>
+                <button class="btn mb-2" style="background-color : white; color: black;"  ng-click="openPortData('/portData')">Port Data</button>
+            </div>
+            <div>
+                <button class="btn"  style="background-color : white; color: black; " ng-click="openSummary('/summary')" >Summary</button>
+        
+            </div>
       </div>
+    </div>
+  </div>
+  <div class="btn-group  pull-right">
+    <a ui-turn-on='myDropdown' class='btn'>
+       <i class="fa fa-ship fa-2x" style="color: white;transform: rotate(-15deg);" class="sidebar-brand-icon rotate-n-15"></i>
+    </a>
+    <ul class="dropdown-menu" 
+      ui-outer-click="Ui.turnOff('myDropdown')"
+      ui-outer-click-if="Ui.active('myDropdown')"
+      role="menu"
+      ui-show="myDropdown" 
+      ui-state="myDropdown"
+      ui-turn-off="myDropdown">
+	  <li ng-click="go('/portData')" ><a>Port Data</a></li>
+	  <li  ng-click="go('/summary')"><a>Summary</a></li>
+      <li><a>Logout</a></li>
+      <li><a>Help</a></li>
+    </ul>
+  </div>
+</div>
 
        
 
