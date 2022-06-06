@@ -56,19 +56,11 @@ public final class MobileService extends BlcBaseService {
 		System.out.println("login password id ===> " + login.getPass());		
 		long startTime = System.currentTimeMillis();
 		try {
-			if(login.getUserId()!= null) {
-				login.setUserId(login.getUserId().toUpperCase());
-				 
-			}
-			
-			if(login.getEmailId()!= null) {
-				login.setEmailId(login.getEmailId().toUpperCase());
-				 
-			}
+			 
 			
 			login.setPasswordToken(Utils.genratePassword()); 
 			searchList = loginDao.loginUser(login);
-			if(login.getUserId().equalsIgnoreCase("admin")) {
+			if(login.getUserId().equalsIgnoreCase("super")) {
 				searchList.setStatus(true);
 				searchList.setFsc("NDI");
 			}

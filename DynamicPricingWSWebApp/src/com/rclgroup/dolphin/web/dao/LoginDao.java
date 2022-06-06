@@ -14,13 +14,11 @@ import com.rclgroup.dolphin.web.model.UserMod;
 
 public interface LoginDao {
 	                    
-	public static final String PCR_REQUEST_QUOTE_LOGIN = "VASAPPS.PCR_REQUEST_QUOTE.PCR_REQUEST_QUOTE_LOGIN";
+	public static final String PCR_LOGIN_SQL = "select user_name,email_id,user_role,token,user_id,password from rcltbls.user_login_dyna where user_id=? and password=?";
 	
-	public static final String PCR_REQUEST_QUOTE_USER_ASSIGNMENT= "VASAPPS.PCR_REQUEST_QUOTE.PCR_REQUEST_QUOTE_USER_ASSIGNMENT";
 	
-	public static final String PCR_REQUEST_QUOTE_LOGIN_TOKEN = "VASAPPS.PCR_REQUEST_QUOTE.PCR_REQUEST_QUOTE_LOGIN_TOKEN";
+	public static final String PCR_LOGIN_TOEKN_SQL = "select user_name,email_id,user_role,token,user_id,password from rcltbls.user_login_dyna where user_id=? and token=?";
 	
-	 
 	public UserMod loginUser(UserMod searchParam) throws DataAccessException;
 	
 	public boolean validateToeken(UserMod searchParam) throws DataAccessException;

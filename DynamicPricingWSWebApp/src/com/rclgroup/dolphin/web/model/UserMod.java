@@ -15,10 +15,9 @@ public class UserMod extends BaseInputMod{
 	private static final Map<String,String> roleMapping =new HashMap<>();
 	
 	static {
-		roleMapping.put("1", "Location User");
-		roleMapping.put("2", "Location Head");
-		roleMapping.put("3", "Region Head");
-		roleMapping.put("4", "SuperUser");
+		roleMapping.put("1", "Customer");
+		roleMapping.put("2", "Admin");		 
+		roleMapping.put("3", "SuperUser");
 		 	
 	}
 	 

@@ -23,3 +23,5 @@ CREATE TABLE rcltbls.pricing_setup (
 	abnormal_formality timestamp NULL,
 	CONSTRAINT pricing_setup_pkey PRIMARY KEY (pk_pricing_setup)
 );
+
+
