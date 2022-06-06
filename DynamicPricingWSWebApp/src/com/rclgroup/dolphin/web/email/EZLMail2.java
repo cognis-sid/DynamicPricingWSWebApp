@@ -78,23 +78,7 @@ public class EZLMail2 {
 	    }
 
 	
-	static  AWSCredentialsProvider credentialsProvider = new AWSCredentialsProvider() {
-	    @Override
-	    public void refresh() {}
-	        @Override
-	        public AWSCredentials getCredentials() {
-	        return new AWSCredentials() {
-	            @Override
-	            public String getAWSSecretKey() {
-	                return "vQl4LqLT6Fz8y3leKnKwaX4kkfaSbka30KElFNlT";
-	            }
-	            @Override
-	            public String getAWSAccessKeyId() {
-	                return "AKIA3ZJZSQOMHOHX3WHV";
-	            }
-	        };
-	    }
-	};
+	 
 	
 	 
 }
